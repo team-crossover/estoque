@@ -1,0 +1,1 @@
+O arquivo "Cronograma Gantt.gan" contém o cronograma com as entregas esperadas para este projeto. Ele deve ser editado com o programa grauito GanttProject. Alternativamente, a imagem "Cronograma Gantt.png" é uma exportação da versão mais recente do cronograma.

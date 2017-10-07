@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="UFG - Projeto" company="" webLink="http://" view-date="2017-08-20" view-index="0" gantt-divider-location="473" resource-divider-location="300" version="2.8.5" locale="pt_BR">
+    <description/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="240" order="0"/>
+        <field id="tpd4" name="Data inicial" width="115" order="1"/>
+        <field id="tpd5" name="Data final" width="114" order="2"/>
+        <option id="color.recent"><![CDATA[#ff9933 #ff0000 #999900 #f4f4f4 #ccff00]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nome" width="210" order="0"/>
+        <field id="1" name="Função" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" name="PRJ - Definir grupo e tema" color="#8cb6ce" meeting="false" start="2017-08-25" duration="1" complete="0" expand="true"/>
+        <task id="2" name="PRJ - Casos de uso" meeting="false" start="2017-08-26" duration="14" complete="0" expand="true"/>
+        <task id="3" name="PRJ - Protótipos" meeting="false" start="2017-09-09" duration="14" complete="0" expand="true"/>
+        <task id="4" name="PRJ - Modelo de classes de análise" meeting="false" start="2017-09-23" duration="14" complete="0" expand="true"/>
+        <task id="5" name="PRJ - Diagrama de arquitetura" meeting="false" start="2017-10-07" duration="14" complete="0" expand="true"/>
+        <task id="6" name="PRJ - Modelo de classes de projeto" meeting="false" start="2017-10-07" duration="14" complete="0" expand="true"/>
+        <task id="7" name="PRJ - Diagrama de sequencia" meeting="false" start="2017-10-21" duration="14" complete="0" expand="true"/>
+        <task id="8" name="PRJ - Diagrama de transição de estados" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
+        <task id="9" name="PRJ - Modelo entidade-relacionamento" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
+        <task id="10" name="PRJ - Implementação" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
+        <task id="11" name="PRJ - Apresentação final" meeting="false" start="2017-11-18" duration="7" complete="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
