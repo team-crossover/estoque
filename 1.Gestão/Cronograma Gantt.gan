@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="UFG - Projeto" company="" webLink="http://" view-date="2017-08-20" view-index="0" gantt-divider-location="473" resource-divider-location="300" version="2.8.5" locale="pt_BR">
+<?xml version="1.0" encoding="UTF-8"?><project name="UFG - Projeto" company="" webLink="http://" view-date="2017-10-08" view-index="0" gantt-divider-location="473" resource-divider-location="300" version="2.8.5" locale="pt_BR">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Nome" width="240" order="0"/>
@@ -37,14 +37,30 @@
         <task id="0" name="PRJ - Definir grupo e tema" color="#8cb6ce" meeting="false" start="2017-08-25" duration="1" complete="0" expand="true"/>
         <task id="2" name="PRJ - Casos de uso" meeting="false" start="2017-08-26" duration="14" complete="0" expand="true"/>
         <task id="3" name="PRJ - Protótipos" meeting="false" start="2017-09-09" duration="14" complete="0" expand="true"/>
-        <task id="4" name="PRJ - Modelo de classes de análise" meeting="false" start="2017-09-23" duration="14" complete="0" expand="true"/>
-        <task id="5" name="PRJ - Diagrama de arquitetura" meeting="false" start="2017-10-07" duration="14" complete="0" expand="true"/>
-        <task id="6" name="PRJ - Modelo de classes de projeto" meeting="false" start="2017-10-07" duration="14" complete="0" expand="true"/>
-        <task id="7" name="PRJ - Diagrama de sequencia" meeting="false" start="2017-10-21" duration="14" complete="0" expand="true"/>
-        <task id="8" name="PRJ - Diagrama de transição de estados" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
-        <task id="9" name="PRJ - Modelo entidade-relacionamento" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
-        <task id="10" name="PRJ - Implementação" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true"/>
-        <task id="11" name="PRJ - Apresentação final" meeting="false" start="2017-11-18" duration="7" complete="0" expand="true"/>
+        <task id="4" name="PRJ - Modelo de classes de análise" color="#8cb6ce" meeting="false" start="2017-09-23" duration="14" complete="0" expand="true"/>
+        <task id="5" name="PRJ - Diagrama de arquitetura" color="#8cb6ce" meeting="false" start="2017-10-07" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Elaborar o diagrama da arquitetura do projeto utilizando a ferramenta Astah Community. Esta arquitetura deve ser aderente ao modelo MVC (Model-View-Controller). ]]></notes>
+        </task>
+        <task id="6" name="PRJ - Modelo de classes de projeto" color="#8cb6ce" meeting="false" start="2017-10-14" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Detalhar o diagrama de classes análise/domínio adicionando as operações com seus respectivos tipos de retorno e parâmetros.
+
+Adicionar ao diagrama as classes de fronteira, controle, negócio e persistência.]]></notes>
+        </task>
+        <task id="7" name="PRJ - Diagrama de sequencia" color="#8cb6ce" meeting="false" start="2017-10-21" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Elaborar diagramas de sequencia para todas as operações dos casos de uso identificados. Utilizar a ferramenta Astah Community. ]]></notes>
+        </task>
+        <task id="8" name="PRJ - Diagrama de transição de estados" color="#8cb6ce" meeting="false" start="2017-11-04" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Elaborar diagramas de transição de estados para modelar os estados das entidades que possuam tal natureza. Utilizar a ferramenta Astah Community. ]]></notes>
+        </task>
+        <task id="9" name="PRJ - Modelo entidade-relacionamento" color="#8cb6ce" meeting="false" start="2017-11-11" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Desenvolver o modelo de dados utilizando uma ferramenta CASE qualquer. Algumas sugestões: MySql Workbench e SQL Power Architect. ]]></notes>
+        </task>
+        <task id="10" name="PRJ - Implementação" color="#8cb6ce" meeting="false" start="2017-11-04" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Implementar conforme as definições anteriores do projeto duas funcionalidades: 1) login no sistema e 2) outra função do sistema que realize as operações de inclusão, alteração, consulta e remoção de dado.]]></notes>
+        </task>
+        <task id="11" name="PRJ - Apresentação final" color="#8cb6ce" meeting="false" start="2017-11-18" duration="7" complete="0" expand="true">
+            <notes><![CDATA[Apresentação da versão final dos projetos elaborados pelos grupos de alunos. ]]></notes>
+        </task>
     </tasks>
     <resources/>
     <allocations/>
