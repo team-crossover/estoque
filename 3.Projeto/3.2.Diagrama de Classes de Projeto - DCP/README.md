@@ -1,0 +1,1 @@
+Nota.: este diagrama pode ter sido modificado durante a criação dos diagramas de sequência. Consulte sua versão mais atualizada dentro do arquivo dos diagramas de sequência.
