@@ -1,11 +1,14 @@
-O sistema foi desenvolvido em Java para desktop, com o banco de dados SQLite. O SQLite foi escolhido por ser leve e n„o necessitar de servidor ou qualquer tipo de instalaÁ„o.
+Uma vers√£o simplificada do sistema foi desenvolvida em Java, com o banco de dados SQLite. O SQLite foi escolhido por ser leve e n√£o necessitar de servidor ou qualquer tipo de instala√ß√£o. O padr√£o MVC foi seguido, conforme a arquitetura definida para o projeto.
 
-O banco È criado autom·ticamente (banco.db) caso n„o exista. Inicialmente, o banco vem populado com trÍs usu·rios:
-- Um administrador (usu·rio "admin" e senha "12345").
-- Um operador (usu·rio "operador" e senha "12345").
-- Um gestor (usu·rio "gestor" e senha "12345").
+O banco de dados √© criado autom√°ticamente (banco.db) caso n√£o exista, na pasta do projeto ou da build. Inicialmente, o banco vem populado com tr√™s usu√°rios:
+- Um administrador (usu√°rio "admin" e senha "12345").
+- Um operador (usu√°rio "operador" e senha "12345").
+- Um gestor (usu√°rio "gestor" e senha "12345").
+Recomenda-se a utiliza√ß√£o do [DB Browser for SQLite](http://sqlitebrowser.org/) para verificar o conte√∫do do banco de dados, caso seja necess√°rio.
 
-Ser„o desenvolvidos os casos de uso:
+Ser√£o desenvolvidos os casos de uso:
 - Efetuar login
-- Manter funcion·rios
+- Manter funcion√°rios
 - Manter lojas
+
+Nota.: aspectos de seguran√ßa est√£o fora do escopo dessa implementa√ß√£o.
