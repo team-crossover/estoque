@@ -8,7 +8,7 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import utils.ConexaoBanco;
-import utils.JanelaMensagem;
+import utils.Mensagens;
 
 /**
  *
@@ -66,12 +66,12 @@ public class Funcionario {
             ConexaoBanco.getInstance().insert("FUNCIONARIO", colunas, valores, true);
             return true;
         } catch (SQLException ex) {
-            JanelaMensagem.exibirErro(ex.getMessage());
+            Mensagens.exibirErro(ex.getMessage());
             return false;
         }
     }
 
-    public boolean lerDoBanco(String user) {
+    public boolean lerDoBancoPorUser(String user) {
         ResultSet rs;
         try {
             rs = ConexaoBanco.getInstance().query("FUNCIONARIO", "Cpf,Nome,Funcao,User,Senha", "User = '" + user + "'");
@@ -85,7 +85,7 @@ public class Funcionario {
             setLogin(new Login(rs.getString("User"), rs.getString("Senha")));
             return true;
         } catch (SQLException ex) {
-            JanelaMensagem.exibirErro(ex.getMessage());
+            Mensagens.exibirErro(ex.getMessage());
             return false;
         }
 

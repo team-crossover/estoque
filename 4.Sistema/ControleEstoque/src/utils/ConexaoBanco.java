@@ -80,6 +80,10 @@ public class ConexaoBanco {
         query = "CREATE UNIQUE INDEX IF NOT EXISTS `Cpf_UNIQUE` "
                 + "ON `FUNCIONARIO` (`Cpf`);";
         stmt.executeUpdate(query);
+        stmt = conexao.createStatement();
+        query = "CREATE UNIQUE INDEX IF NOT EXISTS `User_UNIQUE` "
+                + "ON `FUNCIONARIO` (`User`);";
+        stmt.executeUpdate(query);
     }
 
     private void inserirFuncionariosIniciais() {

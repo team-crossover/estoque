@@ -5,11 +5,9 @@
  */
 package controller;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Funcionario;
 import model.Login;
-import utils.JanelaMensagem;
+import utils.Mensagens;
 import utils.exceptions.*;
 import view.FuncionarioView;
 import view.LoginView;
@@ -31,7 +29,7 @@ public class LoginController {
         try {
             abrirMenu(login.validar());
         } catch (UserInexistente | SenhaInvalida ex) {
-            JanelaMensagem.exibirErro(ex.getMessage(), "Erro de Login");
+            Mensagens.exibirErro(ex.getMessage(), "Erro de Login");
         }
     }
 
@@ -42,7 +40,7 @@ public class LoginController {
                 new FuncionarioView().setVisible(true);
                 break;
             default:
-                JanelaMensagem.exibirErro("Ainda não há menus para sua função.");
+                Mensagens.exibirErro("Ainda não há menus para sua função.");
                 System.exit(1);
         }
     }

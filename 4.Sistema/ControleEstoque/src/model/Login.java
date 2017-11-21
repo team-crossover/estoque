@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import utils.exceptions.*;
 
 /**
- *
+ * 
  * @author Nelson
  */
 public class Login {
@@ -38,25 +33,26 @@ public class Login {
     }
 
     /**
-     * Tenta validar o login fornecido com base nos funcionários do banco.
+     * Verifica se este login pertence a algum funcionário (deve ter o mesmo
+     * usuário e a mesma senha).
+     *
      * @return O Funcionário que possui o login fornecido.
      * @throws UserInexistente
-     * @throws SenhaInvalida 
+     * @throws SenhaInvalida
      */
     public Funcionario validar() throws UserInexistente, SenhaInvalida {
         Funcionario funcionario = new Funcionario();
-        
+
         //Verifica se o usuário existe e o obtém se existir
-        if (!funcionario.lerDoBanco(user)) {
+        if (!funcionario.lerDoBancoPorUser(user)) {
             throw new UserInexistente();
         }
-        
+
         //Verifica se a senha do usuário obtido é a igual à que foi inserida
         if (!funcionario.getLogin().getSenha().equals(senha)) {
             throw new SenhaInvalida();
         }
-        
+
         return funcionario;
     }
 }
-
