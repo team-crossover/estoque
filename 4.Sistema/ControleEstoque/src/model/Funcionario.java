@@ -63,7 +63,7 @@ public class Funcionario {
         String valores = "'" + getCpf() + "','" + getNome() + "','" + login.getUser() + "','"
                 + login.getSenha() + "','" + getFuncaoString() + "'";
         try {
-            ConexaoBanco.getInstance().insert("FUNCIONARIO", colunas, valores);
+            ConexaoBanco.getInstance().insert("FUNCIONARIO", colunas, valores, true);
             return true;
         } catch (SQLException ex) {
             JanelaMensagem.exibirErro(ex.getMessage());

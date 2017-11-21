@@ -81,39 +81,48 @@ public class ConexaoBanco {
                 + "ON `FUNCIONARIO` (`Cpf`);";
         stmt.executeUpdate(query);
     }
-    
+
     private void inserirFuncionariosIniciais() {
         Funcionario funcionario;
-        
+
         funcionario = new Funcionario();
         funcionario.setCpf("12345678901");
         funcionario.setNome("Administrador");
         funcionario.setLogin(new Login("admin", "12345"));
         funcionario.setFuncao(FuncaoEnum.ADMINISTRADOR.toString());
         funcionario.inserirNoBanco();
-        
+
         funcionario = new Funcionario();
         funcionario.setCpf("12345678902");
         funcionario.setNome("Operador");
         funcionario.setLogin(new Login("operador", "12345"));
         funcionario.setFuncao(FuncaoEnum.OPERADOR.toString());
         funcionario.inserirNoBanco();
-        
+
         funcionario = new Funcionario();
         funcionario.setCpf("12345678903");
         funcionario.setNome("Gestor");
         funcionario.setLogin(new Login("gestor", "12345"));
         funcionario.setFuncao(FuncaoEnum.GESTOR.toString());
         funcionario.inserirNoBanco();
-        
+
     }
 
-    public String insert(String tabela, String colunas, String valores) throws SQLException {
+    public String insert(String tabela, String colunas, String valores)
+            throws SQLException {
+
+        return insert(tabela, colunas, valores, false);
+    }
+
+    public String insert(String tabela, String colunas, String valores,
+            boolean ignorarSeExistir) throws SQLException {
+
         if (conexao == null) {
             conectar();
         }
 
-        String todo = "INSERT OR IGNORE INTO `" + tabela + "` (" + colunas + ") VALUES ("
+        String todo = "INSERT " + (ignorarSeExistir ? "OR IGNORE" : "")
+                + " INTO `" + tabela + "` (" + colunas + ") VALUES ("
                 + valores + ");";
 
         Statement s = conexao.createStatement();
@@ -122,18 +131,21 @@ public class ConexaoBanco {
         return todo;
     }
 
-    public ResultSet query(String tabela, String colunas, String where) throws SQLException {
+    public ResultSet query(String tabela, String colunas, String where)
+            throws SQLException {
         if (conexao == null) {
             conectar();
         }
 
-        String sql = "SELECT " + colunas + " FROM `" + tabela + "` WHERE " + where;
+        String sql = "SELECT " + colunas + " FROM `" + tabela + "` WHERE "
+                + where;
         Statement stmt = conexao.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         return rs;
     }
-    
-    public boolean exists(String tabela, String colunas, String where) throws SQLException {
+
+    public boolean exists(String tabela, String colunas, String where)
+            throws SQLException {
         ResultSet rs = query(tabela, colunas, where);
         return rs.next();
     }
