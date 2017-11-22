@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.SQLException;
 import utils.exceptions.*;
 
 /**
@@ -40,16 +41,14 @@ public class Login {
      * @throws UserInexistente
      * @throws SenhaInvalida
      */
-    public Funcionario validar() throws UserInexistente, SenhaInvalida {
-        Funcionario funcionario = new Funcionario();
+    public Funcionario validar() throws UserInexistente, SenhaInvalida, SQLException {
+        Funcionario funcionario = Funcionario.lerPorUser(getUser());
 
-        //Verifica se o usuário existe e o obtém se existir
-        if (!funcionario.lerDoBancoPorUser(user)) {
+        if (funcionario == null) {
             throw new UserInexistente();
         }
 
-        //Verifica se a senha do usuário obtido é a igual à que foi inserida
-        if (!funcionario.getLogin().getSenha().equals(senha)) {
+        if (!funcionario.getLogin().getSenha().equals(this.getSenha())) {
             throw new SenhaInvalida();
         }
 

@@ -7,8 +7,10 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.ConexaoBanco;
-import utils.Mensagens;
+import utils.exceptions.ExcluirUnicoAdministrador;
 
 /**
  *
@@ -57,38 +59,71 @@ public class Funcionario {
         this.funcao = FuncaoEnum.valueOf(funcao);
     }
 
-    public boolean inserirNoBanco() {
-        
+    public static void armazenar(Funcionario f) throws SQLException {
         String colunas = "`Cpf`, `Nome`, `User`, `Senha`, `Funcao`";
-        String valores = "'" + getCpf() + "','" + getNome() + "','" + login.getUser() + "','"
-                + login.getSenha() + "','" + getFuncaoString() + "'";
-        try {
-            ConexaoBanco.getInstance().insert("FUNCIONARIO", colunas, valores, true);
-            return true;
-        } catch (SQLException ex) {
-            Mensagens.exibirErro(ex.getMessage());
-            return false;
-        }
+        String valores = "'" + f.getCpf() + "','" + f.getNome() + "','"
+                + f.getLogin().getUser() + "','" + f.getLogin().getSenha()
+                + "','" + f.getFuncaoString() + "'";
+        ConexaoBanco.getInstance().inserir("FUNCIONARIO", colunas, valores, true);
     }
 
-    public boolean lerDoBancoPorUser(String user) {
-        ResultSet rs;
-        try {
-            rs = ConexaoBanco.getInstance().query("FUNCIONARIO", "Cpf,Nome,Funcao,User,Senha", "User = '" + user + "'");
-            if (rs.isClosed()){
-                return false;
-            }
-            
-            setCpf(rs.getString("Cpf"));
-            setNome(rs.getString("Nome"));
-            setFuncao(rs.getString("Funcao"));
-            setLogin(new Login(rs.getString("User"), rs.getString("Senha")));
-            return true;
-        } catch (SQLException ex) {
-            Mensagens.exibirErro(ex.getMessage());
-            return false;
+    public static Funcionario lerPorUser(String user) throws SQLException {
+        ResultSet rs = ConexaoBanco.getInstance().obter("FUNCIONARIO",
+                "Cpf,Nome,Funcao,User,Senha", "User = '" + user + "'");
+
+        if (rs.isClosed()) {
+            return null;
         }
 
+        Funcionario f = new Funcionario();
+        f.setCpf(rs.getString("Cpf"));
+        f.setNome(rs.getString("Nome"));
+        f.setFuncao(rs.getString("Funcao"));
+        f.setLogin(new Login(rs.getString("User"), rs.getString("Senha")));
+        return f;
+    }
+
+    public static List<Funcionario> lerTodos() throws SQLException {
+        List<Funcionario> funcionarios = new ArrayList<>();
+
+        ResultSet rs = ConexaoBanco.getInstance().obter("FUNCIONARIO",
+                "Cpf,Nome,Funcao,User,Senha", "");
+
+        if (rs.isClosed()) {
+            return null;
+        }
+
+        while (rs.next()) {
+            Funcionario f = new Funcionario();
+            f.setCpf(rs.getString("Cpf"));
+            f.setNome(rs.getString("Nome"));
+            f.setFuncao(rs.getString("Funcao"));
+            f.setLogin(new Login(rs.getString("User"), rs.getString("Senha")));
+            funcionarios.add(f);
+        }
+
+        return funcionarios;
+    }
+
+    public static int qntAdministradores() throws SQLException {
+        ResultSet rs = ConexaoBanco.getInstance().obter("FUNCIONARIO",
+                "count(Cpf)", "Funcao = '" + FuncaoEnum.ADMINISTRADOR.toString() + "'");
+
+        if (rs.isClosed()) {
+            return 0;
+        }
+
+        int cnt = 0;
+        while (rs.next()) {
+            cnt++;
+        }
+
+        return cnt;
+    }
+
+    public static void deletarPorUser(String user) throws SQLException {
+        ConexaoBanco.getInstance().deletar("FUNCIONARIO",
+                "User = '" + user + "'");
     }
 
 }

@@ -1,5 +1,6 @@
 package utils;
 
+import java.io.File;
 import java.sql.*;
 import model.FuncaoEnum;
 import model.Funcionario;
@@ -34,16 +35,25 @@ public class ConexaoBanco {
      * @throws SQLException
      */
     public void conectar() throws SQLException {
-        String bancoDir = "jdbc:sqlite:" + System.getProperty("user.dir")
-                + "\\" + ARQUIVO_BANCO;
+
+        String dir = System.getProperty("user.dir") + File.separator + ARQUIVO_BANCO;
+        String bancoDir = "jdbc:sqlite:" + dir;
+
+        File file = new File(dir);
+        boolean novoBanco = false;
+        if (!file.exists()) {
+            novoBanco = true;
+        }
 
         conexao = DriverManager.getConnection(bancoDir);
+        System.out.println("Conexão com SQLite estabelecida.");
 
-        System.out.println("Database at " + bancoDir);
-        System.out.println("Connection to SQLite has been established.");
-
-        criarTabelas();
-        inserirFuncionariosIniciais();
+        if (novoBanco) {
+            criarTabelas();
+            inserirFuncionariosIniciais();
+            Mensagens.exibirAviso("Um novo banco de dados foi criado com "
+                    + "funcionários inciais.");
+        }
     }
 
     /**
@@ -86,39 +96,39 @@ public class ConexaoBanco {
         stmt.executeUpdate(query);
     }
 
-    private void inserirFuncionariosIniciais() {
-        Funcionario funcionario;
+    private void inserirFuncionariosIniciais() throws SQLException {
+        Funcionario f;
 
-        funcionario = new Funcionario();
-        funcionario.setCpf("12345678901");
-        funcionario.setNome("Administrador");
-        funcionario.setLogin(new Login("admin", "12345"));
-        funcionario.setFuncao(FuncaoEnum.ADMINISTRADOR.toString());
-        funcionario.inserirNoBanco();
+        f = new Funcionario();
+        f.setCpf("12345678901");
+        f.setNome("Administrador");
+        f.setLogin(new Login("admin", "12345"));
+        f.setFuncao(FuncaoEnum.ADMINISTRADOR.toString());
+        Funcionario.armazenar(f);
 
-        funcionario = new Funcionario();
-        funcionario.setCpf("12345678902");
-        funcionario.setNome("Operador");
-        funcionario.setLogin(new Login("operador", "12345"));
-        funcionario.setFuncao(FuncaoEnum.OPERADOR.toString());
-        funcionario.inserirNoBanco();
+        f = new Funcionario();
+        f.setCpf("12345678902");
+        f.setNome("Operador");
+        f.setLogin(new Login("operador", "12345"));
+        f.setFuncao(FuncaoEnum.OPERADOR.toString());
+        Funcionario.armazenar(f);
 
-        funcionario = new Funcionario();
-        funcionario.setCpf("12345678903");
-        funcionario.setNome("Gestor");
-        funcionario.setLogin(new Login("gestor", "12345"));
-        funcionario.setFuncao(FuncaoEnum.GESTOR.toString());
-        funcionario.inserirNoBanco();
+        f = new Funcionario();
+        f.setCpf("12345678903");
+        f.setNome("Gestor");
+        f.setLogin(new Login("gestor", "12345"));
+        f.setFuncao(FuncaoEnum.GESTOR.toString());
+        Funcionario.armazenar(f);
 
     }
 
-    public String insert(String tabela, String colunas, String valores)
+    public String inserir(String tabela, String colunas, String valores)
             throws SQLException {
 
-        return insert(tabela, colunas, valores, false);
+        return ConexaoBanco.this.inserir(tabela, colunas, valores, false);
     }
 
-    public String insert(String tabela, String colunas, String valores,
+    public String inserir(String tabela, String colunas, String valores,
             boolean ignorarSeExistir) throws SQLException {
 
         if (conexao == null) {
@@ -135,23 +145,28 @@ public class ConexaoBanco {
         return todo;
     }
 
-    public ResultSet query(String tabela, String colunas, String where)
+    public ResultSet obter(String tabela, String colunas, String where)
             throws SQLException {
         if (conexao == null) {
             conectar();
         }
 
-        String sql = "SELECT " + colunas + " FROM `" + tabela + "` WHERE "
-                + where;
-        Statement stmt = conexao.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        String sql = "SELECT " + colunas + " FROM `" + tabela + "`"
+                + (where.isEmpty() ? "" : (" WHERE " + where));
+        PreparedStatement stmt = conexao.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
         return rs;
     }
 
-    public boolean exists(String tabela, String colunas, String where)
-            throws SQLException {
-        ResultSet rs = query(tabela, colunas, where);
-        return rs.next();
+    public void deletar(String tabela, String where) throws SQLException {
+        if (conexao == null) {
+            conectar();
+        }
+
+        String todo = "DELETE FROM `" + tabela + "` WHERE " + where;
+
+        PreparedStatement s = conexao.prepareStatement(todo);
+        s.executeUpdate();
     }
 
 }

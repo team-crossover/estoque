@@ -9,8 +9,9 @@ import controller.LoginController;
 import java.sql.SQLException;
 import model.Funcionario;
 import utils.ConexaoBanco;
+import utils.Mensagens;
 
-/** 
+/**
  *
  * @author Nelson
  */
@@ -25,11 +26,11 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         initController();
     }
-    
+
     private void initController() {
         controller.setView(this);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,7 +110,12 @@ public class LoginView extends javax.swing.JFrame {
     private void jLoginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLoginButtonMouseClicked
         String user = jUserField.getText();
         String senha = new String(jSenhaField.getPassword());
-        controller.logar(user, senha);
+
+        try {
+            controller.logar(user, senha);
+        } catch (SQLException ex) {
+            Mensagens.exibirErro(ex.getMessage());
+        }
 
     }//GEN-LAST:event_jLoginButtonMouseClicked
 
@@ -119,15 +125,6 @@ public class LoginView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
-        /* Conecta ao banco de dados */
-        try {
-            ConexaoBanco.getInstance().conectar();
-        } catch (SQLException ex) {
-            System.out.println("Incapaz de conectar ao servidor!");
-            System.exit(1);
-        }
-
         /* Define a aparência para a do Windows*/
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -140,6 +137,13 @@ public class LoginView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
+        try {
+            ConexaoBanco.getInstance().conectar();
+        } catch (SQLException ex) {
+            Mensagens.exibirErro("Incapaz de estabelecer conexão com o servidor.");
+            System.exit(1);
+        }
+
         /* Cria e exibe o formulário  */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -147,6 +151,7 @@ public class LoginView extends javax.swing.JFrame {
                 view.setVisible(true);
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

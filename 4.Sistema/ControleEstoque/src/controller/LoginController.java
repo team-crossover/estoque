@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.sql.SQLException;
 import model.Funcionario;
 import model.Login;
 import utils.Mensagens;
@@ -24,7 +25,7 @@ public class LoginController {
         this.view = view;
     }
     
-    public void logar(String user, String senha) {
+    public void logar(String user, String senha) throws SQLException {
         Login login = new Login(user, senha);
         try {
             abrirMenu(login.validar());
