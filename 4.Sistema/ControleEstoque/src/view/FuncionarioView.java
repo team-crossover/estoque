@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import controller.FuncionarioController;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
+import model.Login;
 import utils.Mensagens;
 import utils.exceptions.ExcluirUnicoAdministrador;
 import utils.exceptions.UserInexistente;
@@ -21,6 +17,9 @@ public class FuncionarioView extends javax.swing.JFrame {
 
     private final FuncionarioController controller = new FuncionarioController();
 
+    private boolean insercao = false;
+    private String userAntigo;
+
     /**
      * Creates new form FuncionarioView
      */
@@ -29,7 +28,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         initController();
 
         try {
-            controller.popularTabela();
+            controller.atualizarTabela();
         } catch (SQLException ex) {
             Mensagens.exibirErro(ex.getMessage());
         }
@@ -59,13 +58,22 @@ public class FuncionarioView extends javax.swing.JFrame {
      * Exibe a janela de detalhes para um funcionário.
      *
      * @param funcionario
+     * @param insercao
      */
-    public void exibirDetalhes(Funcionario funcionario) {
+    public void exibirDetalhes(Funcionario funcionario, boolean insercao) {
         jNomeField.setText(funcionario.getNome());
         jCpfField.setText(funcionario.getCpf());
         jFuncaoCombo.setSelectedItem(funcionario.getFuncaoString());
         jUserField.setText(funcionario.getLogin().getUser());
         jSenhaField.setText(funcionario.getLogin().getSenha());
+        userAntigo = funcionario.getLogin().getUser();
+
+        this.insercao = insercao;
+        if (insercao) {
+            jDetalhesDialog.setTitle("Inserção");
+        } else {
+            jDetalhesDialog.setTitle("Detalhes");
+        }
 
         jDetalhesDialog.setSize(500, 180);
         jDetalhesDialog.setLocationRelativeTo(null);
@@ -96,8 +104,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         jCpfField = new javax.swing.JTextField();
         jFuncaoCombo = new javax.swing.JComboBox<>();
         jSenhaField = new javax.swing.JPasswordField();
-        jExcluirButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jConfirmarButton = new javax.swing.JButton();
         jCancelarButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jToggleButton1 = new javax.swing.JToggleButton();
@@ -105,6 +112,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         jTabela = new javax.swing.JTable();
         jInserirButton = new javax.swing.JButton();
         jDetalharButton = new javax.swing.JButton();
+        jExcluirButton = new javax.swing.JButton();
 
         jDetalhesDialog.setTitle("Detalhes");
         jDetalhesDialog.setMinimumSize(new java.awt.Dimension(500, 175));
@@ -122,22 +130,14 @@ public class FuncionarioView extends javax.swing.JFrame {
 
         jLabel5.setText("Senha");
 
-        jNomeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jNomeFieldActionPerformed(evt);
-            }
-        });
-
         jFuncaoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRADOR", "OPERADOR", "GESTOR" }));
 
-        jExcluirButton.setText("Excluir");
-        jExcluirButton.addActionListener(new java.awt.event.ActionListener() {
+        jConfirmarButton.setText("Confirmar");
+        jConfirmarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jExcluirButtonActionPerformed(evt);
+                jConfirmarButtonActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Salvar");
 
         jCancelarButton.setText("Cancelar");
         jCancelarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -169,14 +169,13 @@ public class FuncionarioView extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
                         .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUserField)
+                            .addComponent(jUserField, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                             .addComponent(jSenhaField)))
                     .addGroup(jDetalhesDialogLayout.createSequentialGroup()
-                        .addComponent(jExcluirButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 273, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jCancelarButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jConfirmarButton)))
                 .addContainerGap())
         );
         jDetalhesDialogLayout.setVerticalGroup(
@@ -199,10 +198,9 @@ public class FuncionarioView extends javax.swing.JFrame {
                 .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jFuncaoCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 48, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jExcluirButton)
-                    .addComponent(jButton2)
+                    .addComponent(jConfirmarButton)
                     .addComponent(jCancelarButton))
                 .addContainerGap())
         );
@@ -283,6 +281,13 @@ public class FuncionarioView extends javax.swing.JFrame {
             }
         });
 
+        jExcluirButton.setText("Excluir");
+        jExcluirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jExcluirButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,7 +298,9 @@ public class FuncionarioView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabelaScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDetalharButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jDetalharButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jExcluirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jInserirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -303,9 +310,10 @@ public class FuncionarioView extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jInserirButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDetalharButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jInserirButton, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jDetalharButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jExcluirButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabelaScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
                 .addContainerGap())
@@ -316,7 +324,11 @@ public class FuncionarioView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jInserirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInserirButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            controller.inserirFuncionario();
+        } catch (SQLException ex) {
+            Mensagens.exibirErro(ex.getMessage());
+        }
     }//GEN-LAST:event_jInserirButtonActionPerformed
 
     private void jDetalharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDetalharButtonActionPerformed
@@ -336,26 +348,44 @@ public class FuncionarioView extends javax.swing.JFrame {
     }//GEN-LAST:event_jDetalharButtonActionPerformed
 
     private void jExcluirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExcluirButtonActionPerformed
+        int linhaSelecionada = jTabela.getSelectedRow();
+        if (linhaSelecionada == -1) {
+            Mensagens.exibirAviso("Nenhum item selecionado.");
+            return;
+        }
+
         try {
-            controller.excluirFuncionario(jNomeField.getText(),
-                    jUserField.getText(), (String) jFuncaoCombo.getSelectedItem());
+            String nome = (String) jTabela.getValueAt(linhaSelecionada, 0);
+            String user = (String) jTabela.getValueAt(linhaSelecionada, 3);
+            String funcao = (String) jTabela.getValueAt(linhaSelecionada, 2);
+            controller.excluirFuncionario(nome, user, funcao);
         } catch (SQLException | ExcluirUnicoAdministrador ex) {
             Mensagens.exibirErro(ex.getMessage());
         }
     }//GEN-LAST:event_jExcluirButtonActionPerformed
 
-    private void jNomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNomeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jNomeFieldActionPerformed
-
     private void jCancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarButtonActionPerformed
         jDetalhesDialog.setVisible(false);
     }//GEN-LAST:event_jCancelarButtonActionPerformed
 
+    private void jConfirmarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmarButtonActionPerformed
+        Funcionario f = new Funcionario();
+        f.setCpf(jCpfField.getText());
+        f.setNome(jNomeField.getText());
+        f.setLogin(new Login(jUserField.getText(),
+                new String(jSenhaField.getPassword())));
+        f.setFuncao((String) jFuncaoCombo.getSelectedItem());
+        try {
+            controller.salvarFuncionario(userAntigo, f, insercao);
+        } catch (SQLException | ExcluirUnicoAdministrador ex) {
+            Mensagens.exibirErro(ex.getMessage());
+        }
+    }//GEN-LAST:event_jConfirmarButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jCancelarButton;
+    private javax.swing.JButton jConfirmarButton;
     private javax.swing.JTextField jCpfField;
     private javax.swing.JButton jDetalharButton;
     private javax.swing.JDialog jDetalhesDialog;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.ResultSet;
@@ -10,7 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import utils.ConexaoBanco;
-import utils.exceptions.ExcluirUnicoAdministrador;
 
 /**
  *
@@ -18,10 +12,10 @@ import utils.exceptions.ExcluirUnicoAdministrador;
  */
 public class Funcionario {
 
-    private String cpf;
-    private String nome;
-    private Login login;
-    private FuncaoEnum funcao;
+    private String cpf = "";
+    private String nome = "";
+    private Login login = new Login("", "");
+    private FuncaoEnum funcao = FuncaoEnum.values()[0];
 
     public String getCpf() {
         return cpf;
@@ -59,12 +53,21 @@ public class Funcionario {
         this.funcao = FuncaoEnum.valueOf(funcao);
     }
 
-    public static void armazenar(Funcionario f) throws SQLException {
+    public static void inserir(Funcionario f) throws SQLException {
         String colunas = "`Cpf`, `Nome`, `User`, `Senha`, `Funcao`";
         String valores = "'" + f.getCpf() + "','" + f.getNome() + "','"
                 + f.getLogin().getUser() + "','" + f.getLogin().getSenha()
                 + "','" + f.getFuncaoString() + "'";
-        ConexaoBanco.getInstance().inserir("FUNCIONARIO", colunas, valores, true);
+        ConexaoBanco.getInstance().inserir("FUNCIONARIO", colunas, valores);
+    }
+
+    public static void atualizar(String userAntigo, Funcionario novoF) throws SQLException {
+        String sets = "Cpf = '" + novoF.getCpf() + "', Nome = '"
+                + novoF.getNome() + "', User = '" + novoF.getLogin().getUser() + "',"
+                + " Senha = '" + novoF.getLogin().getSenha() + "', Funcao = '"
+                + novoF.getFuncaoString() + "'";
+        ConexaoBanco.getInstance().atualizar("FUNCIONARIO", sets, "User = '"
+                + userAntigo + "'");
     }
 
     public static Funcionario lerPorUser(String user) throws SQLException {
@@ -109,16 +112,7 @@ public class Funcionario {
         ResultSet rs = ConexaoBanco.getInstance().obter("FUNCIONARIO",
                 "count(Cpf)", "Funcao = '" + FuncaoEnum.ADMINISTRADOR.toString() + "'");
 
-        if (rs.isClosed()) {
-            return 0;
-        }
-
-        int cnt = 0;
-        while (rs.next()) {
-            cnt++;
-        }
-
-        return cnt;
+        return rs.getInt("count(Cpf)");
     }
 
     public static void deletarPorUser(String user) throws SQLException {

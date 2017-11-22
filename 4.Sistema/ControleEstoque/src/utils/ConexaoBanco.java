@@ -104,45 +104,38 @@ public class ConexaoBanco {
         f.setNome("Administrador");
         f.setLogin(new Login("admin", "12345"));
         f.setFuncao(FuncaoEnum.ADMINISTRADOR.toString());
-        Funcionario.armazenar(f);
+        Funcionario.inserir(f);
 
         f = new Funcionario();
         f.setCpf("12345678902");
         f.setNome("Operador");
         f.setLogin(new Login("operador", "12345"));
         f.setFuncao(FuncaoEnum.OPERADOR.toString());
-        Funcionario.armazenar(f);
+        Funcionario.inserir(f);
 
         f = new Funcionario();
         f.setCpf("12345678903");
         f.setNome("Gestor");
         f.setLogin(new Login("gestor", "12345"));
         f.setFuncao(FuncaoEnum.GESTOR.toString());
-        Funcionario.armazenar(f);
+        Funcionario.inserir(f);
 
     }
 
-    public String inserir(String tabela, String colunas, String valores)
+    public void inserir(String tabela, String colunas, String valores)
             throws SQLException {
-
-        return ConexaoBanco.this.inserir(tabela, colunas, valores, false);
-    }
-
-    public String inserir(String tabela, String colunas, String valores,
-            boolean ignorarSeExistir) throws SQLException {
 
         if (conexao == null) {
             conectar();
         }
 
-        String todo = "INSERT " + (ignorarSeExistir ? "OR IGNORE" : "")
+        String sql = "INSERT "
                 + " INTO `" + tabela + "` (" + colunas + ") VALUES ("
                 + valores + ");";
 
-        Statement s = conexao.createStatement();
-        s.executeUpdate(todo);
-
-        return todo;
+        System.out.println(sql);
+        PreparedStatement s = conexao.prepareStatement(sql);
+        s.executeUpdate();
     }
 
     public ResultSet obter(String tabela, String colunas, String where)
@@ -153,9 +146,23 @@ public class ConexaoBanco {
 
         String sql = "SELECT " + colunas + " FROM `" + tabela + "`"
                 + (where.isEmpty() ? "" : (" WHERE " + where));
+        System.out.println(sql);
         PreparedStatement stmt = conexao.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         return rs;
+    }
+
+    public void atualizar(String tabela, String sets, String where)
+            throws SQLException {
+        if (conexao == null) {
+            conectar();
+        }
+
+        String sql = "UPDATE `" + tabela + "` SET " + sets
+                + " WHERE " + where;
+        System.out.println(sql);
+        PreparedStatement s = conexao.prepareStatement(sql);
+        s.executeUpdate();
     }
 
     public void deletar(String tabela, String where) throws SQLException {
@@ -163,9 +170,9 @@ public class ConexaoBanco {
             conectar();
         }
 
-        String todo = "DELETE FROM `" + tabela + "` WHERE " + where;
-
-        PreparedStatement s = conexao.prepareStatement(todo);
+        String sql = "DELETE FROM `" + tabela + "` WHERE " + where;
+        System.out.println(sql);
+        PreparedStatement s = conexao.prepareStatement(sql);
         s.executeUpdate();
     }
 

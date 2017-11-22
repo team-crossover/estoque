@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.sql.SQLException;
@@ -35,8 +30,34 @@ public class FuncionarioController {
         if (user == null) {
             throw new UserInexistente();
         }
+        view.exibirDetalhes(func, false);
+    }
 
-        view.exibirDetalhes(func);
+    public void inserirFuncionario() throws SQLException {
+        Funcionario func = new Funcionario();
+        view.exibirDetalhes(func, true);
+    }
+
+    public void salvarFuncionario(String userAntigo, Funcionario funcionario,
+            boolean insercao) throws SQLException, ExcluirUnicoAdministrador {
+
+        if (insercao) {
+            Funcionario.inserir(funcionario);
+            
+        } else {
+            //Evita atualizar o único administrador para uma função diferente
+            String funcao = funcionario.getFuncaoString();
+            if (!funcao.equals(FuncaoEnum.ADMINISTRADOR.toString())
+                    && Funcionario.qntAdministradores() == 1) {
+                throw new ExcluirUnicoAdministrador();
+            }
+            
+            Funcionario.atualizar(userAntigo, funcionario);
+        }
+        
+        atualizarTabela();
+        view.ocultarDetalhes();
+        Mensagens.exibirAviso(funcionario.getNome() + " foi atualizado com sucesso!");
     }
 
     public void excluirFuncionario(String nome, String user, String funcao)
@@ -53,16 +74,16 @@ public class FuncionarioController {
         if (confirma) {
             try {
                 Funcionario.deletarPorUser(user);
-                popularTabela();
-                Mensagens.exibirAviso(nome + " foi excluído com sucesso!");
+                atualizarTabela();
                 view.ocultarDetalhes();
+                Mensagens.exibirAviso(nome + " foi excluído com sucesso!");
             } catch (SQLException ex) {
-                Mensagens.exibirErro(ex.getMessage());
+                throw ex;
             }
         }
     }
 
-    public void popularTabela() throws SQLException {
+    public void atualizarTabela() throws SQLException {
         view.limparFuncionarios();
         List<Funcionario> funcs = Funcionario.lerTodos();
         for (Funcionario func : funcs) {

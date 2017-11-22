@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.sql.SQLException;
@@ -24,7 +19,7 @@ public class LoginController {
     public void setView(LoginView view) {
         this.view = view;
     }
-    
+
     public void logar(String user, String senha) throws SQLException {
         Login login = new Login(user, senha);
         try {
@@ -41,7 +36,8 @@ public class LoginController {
                 new FuncionarioView().setVisible(true);
                 break;
             default:
-                Mensagens.exibirErro("Ainda não há menus para sua função.");
+                Mensagens.exibirErro("Ainda não há menus para "
+                        + funcionario.getFuncaoString());
                 System.exit(1);
         }
     }
