@@ -9,26 +9,59 @@ import utils.exceptions.*;
  */
 public class Login {
 
+    /**
+     * O usuário do funcionário.
+     */
     private String user;
+
+    /**
+     * A senha do funcionário.
+     */
     private String senha;
 
+    /**
+     * Construção da classe.
+     * 
+     * @param user O usuário em questão.
+     * @param senha A senha do usuário em questão.
+     */
     public Login(String user, String senha) {
         this.user = user;
         this.senha = senha;
     }
 
+    /**
+     * Método getter para o usuário.
+     * 
+     * @return O usuário em questão.
+     */
     public String getUser() {
         return user;
     }
 
+    /**
+     * Método setter para o usuário.
+     * 
+     * @param user O usuário a ser atualizado.
+     */
     public void setUser(String user) {
         this.user = user;
     }
 
+    /**
+     * Método getter para a senha.
+     * 
+     * @return A senha em questão.
+     */
     public String getSenha() {
         return senha;
     }
 
+    /**
+     * Método setter para a senha.
+     * 
+     * @param senha A senha a ser atualizada.
+     */
     public void setSenha(String senha) {
         this.senha = senha;
     }
