@@ -213,7 +213,7 @@ public class Funcionario {
 
     /**
      * Remove um usuário do sistema através de seu usuário.
-     * 
+     *
      * @param user O usuário do funcionário a ser removido.
      * @throws SQLException Erros relacionados a SQL.
      */
