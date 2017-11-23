@@ -11,6 +11,9 @@ import utils.Mensagens;
  */
 public class LoginView extends javax.swing.JFrame {
 
+    /**
+     * A instância do LoginController.
+     */
     private final LoginController controller = new LoginController();
 
     /**
@@ -21,6 +24,9 @@ public class LoginView extends javax.swing.JFrame {
         initController();
     }
 
+    /**
+     * Chama o método setView para instanciar novo LoginController.
+     */
     private void initController() {
         controller.setView(this);
     }

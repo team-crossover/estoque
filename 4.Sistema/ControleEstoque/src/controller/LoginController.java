@@ -16,12 +16,12 @@ import view.LoginView;
 public class LoginController {
 
     /**
-     * Instancia a classe LoginView.
+     * Declara um objeto da classe LoginView.
      */
     private LoginView view;
 
     /**
-     * Método setter da interface gráfica.
+     * Setter da interface gráfica.
      * 
      * @param view A nova instância da interface.
      */
@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     /**
-     * Método para a exibir a funcionalidade de Login.
+     * Exibe a funcionalidade de Login.
      * 
      * @param user O usuário que irá realizar o login.
      * @param senha A senha do usuário em questão.
@@ -46,7 +46,7 @@ public class LoginController {
     }
 
     /**
-     * Método para exibir o menu relativo aos funcionários.
+     * Exibe o menu relativo aos funcionários.
      * 
      * @param funcionario A entidade correspondente aos funcionários.
      */

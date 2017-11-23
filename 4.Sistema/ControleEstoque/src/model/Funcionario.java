@@ -34,7 +34,7 @@ public class Funcionario {
     private FuncaoEnum funcao = FuncaoEnum.values()[0];
 
     /**
-     * Método getter do Cadastro de Pessoa Física do funcionário.
+     * Getter do Cadastro de Pessoa Física do funcionário.
      * 
      * @return O CPF do funcionário.
      */
@@ -43,7 +43,7 @@ public class Funcionario {
     }
 
     /**
-     * Método setter do Cadastro de Pessoa Física do funcionário.
+     * Setter do Cadastro de Pessoa Física do funcionário.
      * 
      * @param cpf O CPF a ser atualizado.
      */
@@ -52,7 +52,7 @@ public class Funcionario {
     }
 
     /**
-     * Método getter do nome do funcionário.
+     * Getter do nome do funcionário.
      * 
      * @return O nome do funcionário em questão.
      */
@@ -61,7 +61,7 @@ public class Funcionario {
     }
 
     /**
-     * Método setter do nome do funcionário.
+     * Setter do nome do funcionário.
      * 
      * @param nome O nome a ser atualizado.
      */
@@ -70,7 +70,7 @@ public class Funcionario {
     }
 
     /**
-     * Método getter do Login.
+     * Getter do Login.
      * 
      * @return O Login.
      */
@@ -79,7 +79,7 @@ public class Funcionario {
     }
 
     /**
-     * Método setter do Login.
+     * Setter do Login.
      * 
      * @param login A nova instância do Login.
      */
@@ -88,7 +88,7 @@ public class Funcionario {
     }
 
     /**
-     * Método getter da função exercida pelo funcionário em questão.
+     * Getter da função exercida pelo funcionário em questão.
      * 
      * @return A função do funcionário.
      */
@@ -97,7 +97,7 @@ public class Funcionario {
     }
 
     /**
-     * Método que associa uma função existente a uma String.
+     * Associa uma função de um funcionário existente a uma String.
      * 
      * @return A função em questão.
      */
@@ -106,7 +106,7 @@ public class Funcionario {
     }
 
     /**
-     * Método setter da função exercida pelo funcionário em questão.
+     * Setter da função exercida pelo funcionário em questão.
      * 
      * @param funcao A função a ser atualizada.
      */
@@ -115,7 +115,7 @@ public class Funcionario {
     }
 
     /**
-     * Método para cadastro de um novo funcionário no sistema. Os dados deste
+     * Cadastro de um novo funcionário no sistema. Os dados deste
      * são inseridos em uma tabela do banco de dados.
      * 
      * @param f A instância da classe Funcionário.
@@ -130,7 +130,7 @@ public class Funcionario {
     }
 
     /**
-     * Método para atualizar dados do funcionário no sistema. Esses dados são
+     * Atualiza dados do funcionário no sistema. Esses dados são
      * atualizados na tabela do banco de dados.
      * 
      * @param userAntigo O usuário anteriormente registrado.
@@ -147,7 +147,7 @@ public class Funcionario {
     }
 
     /**
-     * Método para ler dados de determinado funcionário.
+     * Realiza a leitura de dados de determinado funcionário.
      * 
      * @param user O funcionário em questão.
      * @return A instância da classe Funcionário.
@@ -170,7 +170,7 @@ public class Funcionario {
     }
 
     /**
-     * Método para listar os funcionários com seus respectivos dados.
+     * Lista os funcionários com seus respectivos dados.
      * 
      * @return Uma lista com os funcionários e seus dados.
      * @throws SQLException Erros relacionados a SQL.
@@ -198,8 +198,8 @@ public class Funcionario {
     }
 
     /**
-     * Método que realiza uma consulta ao banco de dados para retornar o
-     * número de funcionários que são administradores.
+     * Realiza uma consulta ao banco de dados para retornar o número de
+     * funcionários que são administradores.
      * 
      * @return A quantidade de administradores presentes no sistema.
      * @throws SQLException Erros relacionados a SQL.
@@ -212,7 +212,7 @@ public class Funcionario {
     }
 
     /**
-     * Método para remover um usuário do sistema através de seu usuário.
+     * Remove um usuário do sistema através de seu usuário.
      * 
      * @param user O usuário do funcionário a ser removido.
      * @throws SQLException Erros relacionados a SQL.

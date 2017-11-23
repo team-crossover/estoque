@@ -17,12 +17,12 @@ import view.FuncionarioView;
 public class FuncionarioController {
 
     /**
-     * Instancia classe FuncionarioView.
+     * Declara objeto da classe FuncionarioView.
      */
     private FuncionarioView view;
 
     /**
-     * Método getter da interface gráfica.
+     * Getter da interface gráfica.
      * 
      * @return a instância da interface.
      */
@@ -31,7 +31,7 @@ public class FuncionarioController {
     }
 
     /**
-     * Método setter da interface gráfica.
+     * Setter da interface gráfica.
      * 
      * @param view A instância da interface.
      */
@@ -40,8 +40,8 @@ public class FuncionarioController {
     }
 
     /**
-     * Método para exibir a funcionalidade "Detalhar Funcionário" contendo as
-     * opções de editar e excluir funcionário.
+     * Exibe a funcionalidade "Detalhar Funcionário" contendo as opções de
+     * editar e excluir funcionário.
      * 
      * @param user O usuário já criado, que estará listado.
      * @throws SQLException Erros relacionados a SQL.
@@ -56,7 +56,7 @@ public class FuncionarioController {
     }
 
     /**
-     * Método para exibir a funcionalidade "Inserir Funcionário".
+     * Exibe a funcionalidade "Inserir Funcionário".
      * 
      * @throws SQLException Erros relacionados a SQL.
      */
@@ -66,7 +66,7 @@ public class FuncionarioController {
     }
 
     /**
-     * Método para salvar alterações feitas no cadastro do funcionário.
+     * Salva alterações feitas no cadastro do funcionário.
      * 
      * @param userAntigo O usuário anterior.
      * @param funcionario A entidade correspondente ao funcionário no sistema.
@@ -98,7 +98,7 @@ public class FuncionarioController {
     }
 
     /**
-     * Método para a excluir um funcionário cadastrado.
+     * Exclui um funcionário cadastrado.
      * 
      * @param nome O nome do funcionário em questão.
      * @param user O usuário do funcionário em questão.
@@ -131,7 +131,7 @@ public class FuncionarioController {
     }
 
     /**
-     * Método para atualizar a lista com os funcionários.
+     * Atualiza a lista com os funcionários.
      * 
      * @throws SQLException Erros relacionados a SQL.
      */

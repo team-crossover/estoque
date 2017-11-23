@@ -13,15 +13,32 @@ import model.Login;
  */
 public class ConexaoBanco {
 
+    /**
+     * Nome do arquivo correspondente ao banco de dados. 
+     */
     private static final String ARQUIVO_BANCO = "banco.db";
 
+    /**
+     * Declaração do objeto ConexaoBanco.
+     */
     private static ConexaoBanco instance = null;
 
+    /**
+     * Declaração do objeto.
+     */
     private Connection conexao = null;
 
+    /**
+     * Construtor.
+     */
     private ConexaoBanco() {
     }
 
+    /**
+     * Verifica se há uma instância da ConexaoBanco.
+     * 
+     * @return A instância de ConexaoBanco. 
+     */
     public static ConexaoBanco getInstance() {
         if (instance == null) {
             instance = new ConexaoBanco();
@@ -96,6 +113,11 @@ public class ConexaoBanco {
         stmt.executeUpdate(query);
     }
 
+    /**
+     * Insere os funcionários padrão.
+     * 
+     * @throws SQLException Erros relacionados a SQL.
+     */
     private void inserirFuncionariosIniciais() throws SQLException {
         Funcionario f;
 
@@ -122,6 +144,14 @@ public class ConexaoBanco {
 
     }
 
+    /**
+     * Insere dados no banco.
+     * 
+     * @param tabela A tabela a ter dados inseridos.
+     * @param colunas A coluna a ter dados inseridos.
+     * @param valores Os valores a serem inseridos como dados.
+     * @throws SQLException Erros relacionados a SQL.
+     */
     public void inserir(String tabela, String colunas, String valores)
             throws SQLException {
 
@@ -138,6 +168,15 @@ public class ConexaoBanco {
         s.executeUpdate();
     }
 
+    /**
+     * Consulta SQL simples.
+     * 
+     * @param tabela A tabela a ser consultada.
+     * @param colunas As colunas a serem consultadas.
+     * @param where Determinada cláusula a especificar a consulta.
+     * @return A consulta propriamente dita.
+     * @throws SQLException Erros relacionados a SQL.
+     */
     public ResultSet obter(String tabela, String colunas, String where)
             throws SQLException {
         if (conexao == null) {
@@ -152,6 +191,14 @@ public class ConexaoBanco {
         return rs;
     }
 
+    /**
+     * Atualiza dados no banco.
+     * 
+     * @param tabela A tabela a ser atualizada.
+     * @param sets O elemento a ser alterado.
+     * @param where Determinada cláusula a especificar a atualização.
+     * @throws SQLException 
+     */
     public void atualizar(String tabela, String sets, String where)
             throws SQLException {
         if (conexao == null) {
@@ -165,6 +212,13 @@ public class ConexaoBanco {
         s.executeUpdate();
     }
 
+    /**
+     * Deleta dados de determinada tabela.
+     * 
+     * @param tabela A tabela que terá o dado excluído.
+     * @param where Determinada cláusula a especificar a exclusão.
+     * @throws SQLException Erros relacionados a SQL.
+     */
     public void deletar(String tabela, String where) throws SQLException {
         if (conexao == null) {
             conectar();

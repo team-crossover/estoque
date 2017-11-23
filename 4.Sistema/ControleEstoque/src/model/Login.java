@@ -31,7 +31,7 @@ public class Login {
     }
 
     /**
-     * Método getter para o usuário.
+     * Getter para o usuário.
      * 
      * @return O usuário em questão.
      */
@@ -40,7 +40,7 @@ public class Login {
     }
 
     /**
-     * Método setter para o usuário.
+     * Setter para o usuário.
      * 
      * @param user O usuário a ser atualizado.
      */
@@ -49,7 +49,7 @@ public class Login {
     }
 
     /**
-     * Método getter para a senha.
+     * Getter para a senha.
      * 
      * @return A senha em questão.
      */
@@ -58,7 +58,7 @@ public class Login {
     }
 
     /**
-     * Método setter para a senha.
+     * Setter para a senha.
      * 
      * @param senha A senha a ser atualizada.
      */

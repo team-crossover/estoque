@@ -15,9 +15,19 @@ import utils.exceptions.UserInexistente;
  */
 public class FuncionarioView extends javax.swing.JFrame {
 
+    /**
+     * Instância de FuncionarioController.
+     */
     private final FuncionarioController controller = new FuncionarioController();
 
+    /**
+     * Status da inserção de um novo funcionário.
+     */
     private boolean insercao = false;
+
+    /**
+     * Usuário anterior.
+     */
     private String userAntigo;
 
     /**
@@ -34,6 +44,9 @@ public class FuncionarioView extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Chama o método setView para instanciar novo FuncionarioController.
+     */
     private void initController() {
         controller.setView(this);
     }
@@ -49,6 +62,9 @@ public class FuncionarioView extends javax.swing.JFrame {
             funcionario.getFuncaoString(), funcionario.getLogin().getUser()});
     }
 
+    /**
+     * Limpa a tela de funcionários.
+     */
     public void limparFuncionarios() {
         DefaultTableModel model = (DefaultTableModel) jTabela.getModel();
         model.setRowCount(0);
@@ -80,6 +96,9 @@ public class FuncionarioView extends javax.swing.JFrame {
         jDetalhesDialog.setVisible(true);
     }
 
+    /**
+     * Janela para ocultar detalhes.
+     */
     public void ocultarDetalhes() {
         jDetalhesDialog.setVisible(false);
     }
@@ -323,6 +342,11 @@ public class FuncionarioView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Botão de inserir novo funcionário.
+     * 
+     * @param evt 
+     */
     private void jInserirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jInserirButtonActionPerformed
         try {
             controller.inserirFuncionario();
@@ -331,6 +355,10 @@ public class FuncionarioView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jInserirButtonActionPerformed
 
+    /**
+     * Botão para detalhar funcionário.
+     * @param evt 
+     */
     private void jDetalharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDetalharButtonActionPerformed
         int linhaSelecionada = jTabela.getSelectedRow();
         if (linhaSelecionada == -1) {
@@ -347,6 +375,11 @@ public class FuncionarioView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jDetalharButtonActionPerformed
 
+    /**
+     * Botão para exclusão de funcionário.
+     * 
+     * @param evt 
+     */
     private void jExcluirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExcluirButtonActionPerformed
         int linhaSelecionada = jTabela.getSelectedRow();
         if (linhaSelecionada == -1) {
@@ -364,10 +397,18 @@ public class FuncionarioView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jExcluirButtonActionPerformed
 
+    /**
+     * Cancela alguma confirmação.
+     * @param evt 
+     */
     private void jCancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCancelarButtonActionPerformed
         jDetalhesDialog.setVisible(false);
     }//GEN-LAST:event_jCancelarButtonActionPerformed
 
+    /**
+     * Confirma cadastro de novo funcionário.
+     * @param evt 
+     */
     private void jConfirmarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmarButtonActionPerformed
         Funcionario f = new Funcionario();
         f.setCpf(jCpfField.getText());
