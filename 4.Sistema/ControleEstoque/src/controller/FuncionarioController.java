@@ -12,7 +12,7 @@ import view.FuncionarioView;
 
 /**
  * Classe controller da entidade Funcionário.
- * 
+ *
  * @author aluno
  */
 public class FuncionarioController {
@@ -24,7 +24,7 @@ public class FuncionarioController {
 
     /**
      * Getter da interface gráfica.
-     * 
+     *
      * @return a instância da interface.
      */
     public FuncionarioView getView() {
@@ -33,7 +33,7 @@ public class FuncionarioController {
 
     /**
      * Setter da interface gráfica.
-     * 
+     *
      * @param view A instância da interface.
      */
     public void setView(FuncionarioView view) {
@@ -43,7 +43,7 @@ public class FuncionarioController {
     /**
      * Exibe a funcionalidade "Detalhar Funcionário" contendo as opções de
      * editar e excluir funcionário.
-     * 
+     *
      * @param user O usuário já criado, que estará listado.
      * @throws SQLException Erros relacionados a SQL.
      * @throws UserInexistente Caso de usuário que não está listado.
@@ -58,7 +58,7 @@ public class FuncionarioController {
 
     /**
      * Exibe a funcionalidade "Inserir Funcionário".
-     * 
+     *
      * @throws SQLException Erros relacionados a SQL.
      */
     public void inserirFuncionario() throws SQLException {
@@ -68,7 +68,7 @@ public class FuncionarioController {
 
     /**
      * Salva alterações feitas no cadastro do funcionário.
-     * 
+     *
      * @param userAntigo O usuário anterior.
      * @param funcionario A entidade correspondente ao funcionário no sistema.
      * @param insercao Para permitir a inserção do funcionário.
@@ -84,21 +84,23 @@ public class FuncionarioController {
         if (Funcionario.trataCamposObrigatorios(funcionario)) {
             throw new CampoObrigatorio();
         }
-        
+
         if (insercao) {
             Funcionario.inserir(funcionario);
         } else {
-            
+
             //Evita atualizar o único administrador para uma função diferente
-            String funcao = funcionario.getFuncaoString();
-            if (!funcao.equals(FuncaoEnum.ADMINISTRADOR.toString())
+            String antigaFuncao = Funcionario.lerPorUser(userAntigo).getFuncaoString();
+            String novaFuncao = funcionario.getFuncaoString();
+            if (antigaFuncao.equals(FuncaoEnum.ADMINISTRADOR.toString())
+                    && !novaFuncao.equals(FuncaoEnum.ADMINISTRADOR.toString())
                     && Funcionario.qntAdministradores() == 1) {
                 throw new ExcluirUnicoAdministrador();
             }
-            
+
             Funcionario.atualizar(userAntigo, funcionario);
         }
-        
+
         atualizarTabela();
         view.ocultarDetalhes();
         Mensagens.exibirAviso(funcionario.getNome() + " foi atualizado com sucesso!");
@@ -106,7 +108,7 @@ public class FuncionarioController {
 
     /**
      * Exclui um funcionário cadastrado.
-     * 
+     *
      * @param nome O nome do funcionário em questão.
      * @param user O usuário do funcionário em questão.
      * @param funcao A função do funcionário em questão.
@@ -139,7 +141,7 @@ public class FuncionarioController {
 
     /**
      * Atualiza a lista com os funcionários.
-     * 
+     *
      * @throws SQLException Erros relacionados a SQL.
      */
     public void atualizarTabela() throws SQLException {
