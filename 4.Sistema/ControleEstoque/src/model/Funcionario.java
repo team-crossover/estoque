@@ -222,7 +222,11 @@ public class Funcionario {
                 "User = '" + user + "'");
     }
 
-    //Verifica se existe algum campo que está vazio
+    /**
+     * Verifica se existe algum campo que está vazio
+     * @param f objeto funcionário
+     * @return true para campos vazios.
+     */
     public static boolean trataCamposObrigatorios(Funcionario f) {
         if (f.getNome().equals("") || f.getCpf().equals("")
                 || f.login.getUser().equals("") || f.login.getSenha().equals("")) {
@@ -232,9 +236,14 @@ public class Funcionario {
         }
     }
 
+    /**
+     * Verifica se o cpf está no formato correto.
+     * @param cpf do funcionário.
+     * @return true para cpf correto.
+     */
     public static boolean tratarCpf(String cpf) {
 
-        if (cpf.length() < 11) {
+        if (cpf.length() != 11) {
             return false;
         } else {
             for (char letra : cpf.toCharArray()) {

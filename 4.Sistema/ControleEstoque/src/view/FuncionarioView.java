@@ -138,7 +138,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         jExcluirButton = new javax.swing.JButton();
 
         jDetalhesDialog.setTitle("Detalhes");
-        jDetalhesDialog.setMinimumSize(new java.awt.Dimension(500, 175));
+        jDetalhesDialog.setMinimumSize(new java.awt.Dimension(500, 190));
         jDetalhesDialog.setModal(true);
         jDetalhesDialog.setPreferredSize(new java.awt.Dimension(500, 175));
         jDetalhesDialog.setResizable(false);
@@ -250,7 +250,7 @@ public class FuncionarioView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -330,7 +330,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)

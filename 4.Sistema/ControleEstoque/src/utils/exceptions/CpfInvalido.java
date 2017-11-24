@@ -15,7 +15,7 @@ public class CpfInvalido extends Exception {
 
     @Override
     public String getMessage() {
-        return "CPF em formto inválido!\n"
+        return "CPF em formato inválido!\n"
                 + "*Verifique se há onze dígitos e se são somente números";
     }
 }
