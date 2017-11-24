@@ -6,8 +6,12 @@
 package utils.exceptions;
 
 /**
+ * Mensagem a ser exibida quando há tentativa de cadastramento
+ * com campos obrigatórios não preenchidos.
  *
  * @author Natalia
+ *
+ * @return A mensagem em questão.
  */
 public class CampoObrigatorio extends Exception {
 
