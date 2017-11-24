@@ -9,6 +9,7 @@ import model.Funcionario;
 import model.Login;
 import utils.Mensagens;
 import utils.exceptions.CampoObrigatorio;
+import utils.exceptions.CpfInvalido;
 import utils.exceptions.ExcluirUnicoAdministrador;
 import utils.exceptions.UserInexistente;
 
@@ -421,7 +422,7 @@ public class FuncionarioView extends javax.swing.JFrame {
         f.setFuncao((String) jFuncaoCombo.getSelectedItem());
         try {
             controller.salvarFuncionario(userAntigo, f, insercao);
-        } catch (SQLException | ExcluirUnicoAdministrador | CampoObrigatorio ex) 
+        } catch (SQLException | ExcluirUnicoAdministrador | CampoObrigatorio | CpfInvalido ex) 
         {
             Mensagens.exibirErro(ex.getMessage());
         } 

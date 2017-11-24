@@ -232,4 +232,18 @@ public class Funcionario {
         }
     }
 
+    public static boolean tratarCpf(String cpf) {
+
+        if (cpf.length() < 11) {
+            return false;
+        } else {
+            for (char letra : cpf.toCharArray()) {
+                if (letra < '0' || letra > '9') {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
 }

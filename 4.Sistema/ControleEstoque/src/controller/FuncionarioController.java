@@ -6,6 +6,7 @@ import model.FuncaoEnum;
 import model.Funcionario;
 import utils.Mensagens;
 import utils.exceptions.CampoObrigatorio;
+import utils.exceptions.CpfInvalido;
 import utils.exceptions.ExcluirUnicoAdministrador;
 import utils.exceptions.UserInexistente;
 import view.FuncionarioView;
@@ -76,13 +77,18 @@ public class FuncionarioController {
      * @throws ExcluirUnicoAdministrador Para evitar alterar a função do
      * administrador.
      * @throws utils.exceptions.CampoObrigatorio
+     * @throws utils.exceptions.CpfInvalido
      */
     public void salvarFuncionario(String userAntigo, Funcionario funcionario,
             boolean insercao) throws SQLException, ExcluirUnicoAdministrador,
-            CampoObrigatorio {
+            CampoObrigatorio, CpfInvalido {
 
         if (Funcionario.trataCamposObrigatorios(funcionario)) {
             throw new CampoObrigatorio();
+        }
+        
+        if (Funcionario.tratarCpf(funcionario.getCpf()) == false) {
+            throw new CpfInvalido();
         }
 
         if (insercao) {
@@ -147,8 +153,8 @@ public class FuncionarioController {
     public void atualizarTabela() throws SQLException {
         view.limparFuncionarios();
         List<Funcionario> funcs = Funcionario.lerTodos();
-        for (Funcionario func : funcs) {
+        funcs.forEach((func) -> {
             view.adicionarFuncionario(func);
-        }
+        });
     }
 }
