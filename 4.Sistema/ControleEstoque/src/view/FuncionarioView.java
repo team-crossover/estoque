@@ -2,10 +2,13 @@ package view;
 
 import controller.FuncionarioController;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 import model.Login;
 import utils.Mensagens;
+import utils.exceptions.CampoObrigatorio;
 import utils.exceptions.ExcluirUnicoAdministrador;
 import utils.exceptions.UserInexistente;
 
@@ -139,15 +142,15 @@ public class FuncionarioView extends javax.swing.JFrame {
         jDetalhesDialog.setPreferredSize(new java.awt.Dimension(500, 175));
         jDetalhesDialog.setResizable(false);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("* Nome");
 
-        jLabel2.setText("CPF");
+        jLabel2.setText("* CPF");
 
-        jLabel3.setText("Função");
+        jLabel3.setText("* Função");
 
-        jLabel4.setText("Usuário");
+        jLabel4.setText("* Usuário");
 
-        jLabel5.setText("Senha");
+        jLabel5.setText("* Senha");
 
         jFuncaoCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMINISTRADOR", "OPERADOR", "GESTOR" }));
 
@@ -176,7 +179,7 @@ public class FuncionarioView extends javax.swing.JFrame {
                         .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(9, 9, 9)
                         .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCpfField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
@@ -188,7 +191,7 @@ public class FuncionarioView extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
                         .addGroup(jDetalhesDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jUserField, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(jUserField, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                             .addComponent(jSenhaField)))
                     .addGroup(jDetalhesDialogLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -418,9 +421,10 @@ public class FuncionarioView extends javax.swing.JFrame {
         f.setFuncao((String) jFuncaoCombo.getSelectedItem());
         try {
             controller.salvarFuncionario(userAntigo, f, insercao);
-        } catch (SQLException | ExcluirUnicoAdministrador ex) {
+        } catch (SQLException | ExcluirUnicoAdministrador | CampoObrigatorio ex) 
+        {
             Mensagens.exibirErro(ex.getMessage());
-        }
+        } 
     }//GEN-LAST:event_jConfirmarButtonActionPerformed
 
 

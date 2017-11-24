@@ -5,6 +5,7 @@ import java.util.List;
 import model.FuncaoEnum;
 import model.Funcionario;
 import utils.Mensagens;
+import utils.exceptions.CampoObrigatorio;
 import utils.exceptions.ExcluirUnicoAdministrador;
 import utils.exceptions.UserInexistente;
 import view.FuncionarioView;
@@ -74,14 +75,20 @@ public class FuncionarioController {
      * @throws SQLException Erros relacionados a SQL.
      * @throws ExcluirUnicoAdministrador Para evitar alterar a função do
      * administrador.
+     * @throws utils.exceptions.CampoObrigatorio
      */
     public void salvarFuncionario(String userAntigo, Funcionario funcionario,
-            boolean insercao) throws SQLException, ExcluirUnicoAdministrador {
+            boolean insercao) throws SQLException, ExcluirUnicoAdministrador,
+            CampoObrigatorio {
 
+        if (Funcionario.trataCamposObrigatorios(funcionario)) {
+            throw new CampoObrigatorio();
+        }
+        
         if (insercao) {
             Funcionario.inserir(funcionario);
-            
         } else {
+            
             //Evita atualizar o único administrador para uma função diferente
             String funcao = funcionario.getFuncaoString();
             if (!funcao.equals(FuncaoEnum.ADMINISTRADOR.toString())

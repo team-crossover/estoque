@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/model/Funcionario.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/utils/Mensagens.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/controller/LoginController.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/utils/ConexaoBanco.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/controller/FuncionarioController.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/model/Login.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/view/FuncionarioView.java</file>
-            <file>file:/home/aluno/Downloads/PS-2017-2-ES-Estoque-master/4.Sistema/ControleEstoque/src/view/LoginView.java</file>
+            <file>file:/C:/Users/Natalia/Documents/PS-2017-2-ES-Estoque/4.Sistema/ControleEstoque/src/view/FuncionarioView.java</file>
+            <file>file:/C:/Users/Natalia/Documents/PS-2017-2-ES-Estoque/4.Sistema/ControleEstoque/src/model/Funcionario.java</file>
+            <file>file:/C:/Users/Natalia/Documents/PS-2017-2-ES-Estoque/4.Sistema/ControleEstoque/src/utils/exceptions/ExcluirUnicoAdministrador.java</file>
+            <file>file:/C:/Users/Natalia/Documents/PS-2017-2-ES-Estoque/4.Sistema/ControleEstoque/src/utils/exceptions/CampoObrigatorio.java</file>
         </group>
     </open-files>
 </project-private>

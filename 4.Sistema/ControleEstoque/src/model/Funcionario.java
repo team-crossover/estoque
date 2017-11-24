@@ -8,11 +8,11 @@ import utils.ConexaoBanco;
 
 /**
  * Classe correspondente à entidade "Funcionário".
- * 
+ *
  * @author Nelson
  */
 public class Funcionario {
-  
+
     /**
      * O cpf do funcionário em questão.
      */
@@ -35,7 +35,7 @@ public class Funcionario {
 
     /**
      * Getter do Cadastro de Pessoa Física do funcionário.
-     * 
+     *
      * @return O CPF do funcionário.
      */
     public String getCpf() {
@@ -44,7 +44,7 @@ public class Funcionario {
 
     /**
      * Setter do Cadastro de Pessoa Física do funcionário.
-     * 
+     *
      * @param cpf O CPF a ser atualizado.
      */
     public void setCpf(String cpf) {
@@ -53,7 +53,7 @@ public class Funcionario {
 
     /**
      * Getter do nome do funcionário.
-     * 
+     *
      * @return O nome do funcionário em questão.
      */
     public String getNome() {
@@ -62,7 +62,7 @@ public class Funcionario {
 
     /**
      * Setter do nome do funcionário.
-     * 
+     *
      * @param nome O nome a ser atualizado.
      */
     public void setNome(String nome) {
@@ -71,7 +71,7 @@ public class Funcionario {
 
     /**
      * Getter do Login.
-     * 
+     *
      * @return O Login.
      */
     public Login getLogin() {
@@ -80,7 +80,7 @@ public class Funcionario {
 
     /**
      * Setter do Login.
-     * 
+     *
      * @param login A nova instância do Login.
      */
     public void setLogin(Login login) {
@@ -89,7 +89,7 @@ public class Funcionario {
 
     /**
      * Getter da função exercida pelo funcionário em questão.
-     * 
+     *
      * @return A função do funcionário.
      */
     public FuncaoEnum getFuncao() {
@@ -98,7 +98,7 @@ public class Funcionario {
 
     /**
      * Associa uma função de um funcionário existente a uma String.
-     * 
+     *
      * @return A função em questão.
      */
     public String getFuncaoString() {
@@ -107,7 +107,7 @@ public class Funcionario {
 
     /**
      * Setter da função exercida pelo funcionário em questão.
-     * 
+     *
      * @param funcao A função a ser atualizada.
      */
     public void setFuncao(String funcao) {
@@ -115,9 +115,9 @@ public class Funcionario {
     }
 
     /**
-     * Cadastro de um novo funcionário no sistema. Os dados deste
-     * são inseridos em uma tabela do banco de dados.
-     * 
+     * Cadastro de um novo funcionário no sistema. Os dados deste são inseridos
+     * em uma tabela do banco de dados.
+     *
      * @param f A instância da classe Funcionário.
      * @throws SQLException Erros relacionados a SQL.
      */
@@ -130,9 +130,9 @@ public class Funcionario {
     }
 
     /**
-     * Atualiza dados do funcionário no sistema. Esses dados são
-     * atualizados na tabela do banco de dados.
-     * 
+     * Atualiza dados do funcionário no sistema. Esses dados são atualizados na
+     * tabela do banco de dados.
+     *
      * @param userAntigo O usuário anteriormente registrado.
      * @param novoF A instância da entidade para se extrair o nome atualizado.
      * @throws SQLException Erros relacionados a SQL.
@@ -148,7 +148,7 @@ public class Funcionario {
 
     /**
      * Realiza a leitura de dados de determinado funcionário.
-     * 
+     *
      * @param user O funcionário em questão.
      * @return A instância da classe Funcionário.
      * @throws SQLException Erros relacionados a SQL.
@@ -171,7 +171,7 @@ public class Funcionario {
 
     /**
      * Lista os funcionários com seus respectivos dados.
-     * 
+     *
      * @return Uma lista com os funcionários e seus dados.
      * @throws SQLException Erros relacionados a SQL.
      */
@@ -200,7 +200,7 @@ public class Funcionario {
     /**
      * Realiza uma consulta ao banco de dados para retornar o número de
      * funcionários que são administradores.
-     * 
+     *
      * @return A quantidade de administradores presentes no sistema.
      * @throws SQLException Erros relacionados a SQL.
      */
@@ -220,6 +220,16 @@ public class Funcionario {
     public static void deletarPorUser(String user) throws SQLException {
         ConexaoBanco.getInstance().deletar("FUNCIONARIO",
                 "User = '" + user + "'");
+    }
+
+    //Verifica se existe algum campo que está vazio
+    public static boolean trataCamposObrigatorios(Funcionario f) {
+        if (f.getNome().equals("") || f.getCpf().equals("")
+                || f.login.getUser().equals("") || f.login.getSenha().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
