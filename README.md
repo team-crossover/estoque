@@ -1,9 +1,7 @@
-# PS-2017-2-ES-Estoque
-Repositório do projeto para a disciplina de Projeto de Software, do professor Rubens (Engenharia de Software, Instituto de Informática, UFG, 2017-2). O tema do projeto é um sistema de Controle de Estoque, conforme requisitos informados pelo professor.
+# Estoque
+Sistema de controle de estoque.
 
-Membros do grupo:
-- Nelson William
-- Sofia Moraes
-- Natália Lopes
-- Larissa Chyevena
-- João Pedro Arruda
+Trabalho feito para a disciplina de Projeto de Software, do semestre 2017-2, do curso de graduação em Engenharia de Software da Universidade Federal de Goiás.
+
+## Licença
+[MIT License](LICENSE)
